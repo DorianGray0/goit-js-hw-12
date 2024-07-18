@@ -9,6 +9,7 @@ const elements = {
   form: document.querySelector('.js-form'),
   spinner: document.querySelector('.js-loader'),
 };
+
 elements.form.addEventListener('submit', handlerSearch);
 
 function handlerSearch(evt) {
