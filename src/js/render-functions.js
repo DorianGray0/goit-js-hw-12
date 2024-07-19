@@ -30,9 +30,20 @@ function renderFunctions(photos) {
   lightbox.refresh();
 }
 
+function smoothScroll() {
+  const galleryItem = document.querySelector('.gallery');
+  if (galleryItem) {
+    const { height } = console.log(galleryItem.getBoundingClientRect());
+    window.scrollBy({
+      top: height * 2,
+      behavior: 'smooth',
+    });
+  }
+}
+
 function clearList() {
   const list = document.querySelector('.photos-list');
   return (list.innerHTML = '');
 }
 
-export { clearList, renderFunctions };
+export { clearList, renderFunctions, smoothScroll };

@@ -3,7 +3,11 @@ import 'izitoast/dist/css/iziToast.min.css';
 import caution from './img/bi_exclamation-triangle.png';
 
 import { fetchPhotos } from './js/pixabay-api';
-import { clearList, renderFunctions } from './js/render-functions';
+import {
+  clearList,
+  renderFunctions,
+  smoothScroll,
+} from './js/render-functions';
 
 const elements = {
   form: document.querySelector('.js-form'),
@@ -80,6 +84,7 @@ async function handlerLoader() {
     const { hits } = await fetchPhotos(params);
 
     renderFunctions(hits);
+    smoothScroll();
   } catch (err) {
     console.log(err);
   } finally {
