@@ -33,7 +33,7 @@ function renderFunctions(photos) {
 function smoothScroll() {
   const galleryItem = document.querySelector('.gallery');
   if (galleryItem) {
-    const { height } = console.log(galleryItem.getBoundingClientRect());
+    const { height } = galleryItem.getBoundingClientRect();
     window.scrollBy({
       top: height * 2,
       behavior: 'smooth',
