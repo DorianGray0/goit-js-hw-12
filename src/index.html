@@ -13,11 +13,16 @@
 
       <form class="js-form form">
         <input class="form-inp" type="text" name="textValue" />
-        <button type="submit" class="search-btn">Search</button>
+        <button type="submit" class="js-search-btn search-btn">Search</button>
       </form>
 
-      <span class="loader js-loader hidden">Load&nbsp;ng</span>
       <ul class="photos-list"></ul>
+      <div class="wrap-btn">
+        <span class="loader js-loader hidden">Load&nbsp;ng</span>
+        <button class="js-btn-more search-btn-more hidden" type="button">
+          Load more
+        </button>
+      </div>
     </section>
 
     <script type="module" src="./main.js"></script>

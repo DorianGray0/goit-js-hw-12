@@ -8,16 +8,23 @@ import { clearList, renderFunctions } from './js/render-functions';
 const elements = {
   form: document.querySelector('.js-form'),
   spinner: document.querySelector('.js-loader'),
+  btnMore: document.querySelector('.js-btn-more'),
 };
+
+const hiddenClass = 'hidden';
 
 const params = {
   q: '',
+  page: 1,
+  per_page: 15,
+  maxPage: 0,
 };
 
 elements.form.addEventListener('submit', handlerSearch);
 
 async function handlerSearch(evt) {
   evt.preventDefault();
+  params.page = 1;
 
   const form = evt.currentTarget;
   params.q = form.elements.textValue.value.trim();
@@ -43,8 +50,18 @@ async function handlerSearch(evt) {
   spinnerShown();
 
   try {
-    const hits = await fetchPhotos(params);
+    const { hits, total } = await fetchPhotos(params);
+
+    // params.maxPage = Math.ceil(total / params.per_page);
+
     renderFunctions(hits);
+
+    if (hits.length > 0 && hits.length !== total) {
+      elements.btnMore.classList.remove(hiddenClass);
+      elements.btnMore.addEventListener('click', handlerLoader);
+    } else {
+      elements.btnMore.classList.add(hiddenClass);
+    }
   } catch (err) {
     console.log(err);
   } finally {
@@ -53,10 +70,27 @@ async function handlerSearch(evt) {
   }
 }
 
+async function handlerLoader() {
+  elements.btnMore.classList.add(hiddenClass);
+  spinnerShown();
+
+  params.page += 1;
+  try {
+    const { hits } = await fetchPhotos(params);
+
+    renderFunctions(hits);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    spinnerClose();
+    elements.btnMore.classList.remove(hiddenClass);
+  }
+}
+
 function spinnerShown() {
-  return elements.spinner.classList.remove('hidden');
+  return elements.spinner.classList.remove(hiddenClass);
 }
 
 function spinnerClose() {
-  return elements.spinner.classList.add('hidden');
+  return elements.spinner.classList.add(hiddenClass);
 }

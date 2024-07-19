@@ -25,8 +25,6 @@ function renderFunctions(photos) {
     )
     .join('');
 
-  clearList();
-
   list.insertAdjacentHTML('beforeend', photoList);
   const lightbox = new SimpleLightbox('.gallery a');
   lightbox.refresh();

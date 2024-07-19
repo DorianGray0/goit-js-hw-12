@@ -11,26 +11,21 @@ const END_POINT = 'api/';
 
 axios.defaults.baseURL = URL;
 
-export async function fetchPhotos({ q = '' } = {}) {
-  // const searchParams = new URLSearchParams({
-  //   q: textValue,
-  //   image_type: 'photo',
-  //   orientation: 'horizontal',
-  //   safesearch: 'true',
-  // });
-
+export async function fetchPhotos({ q = '', page = 1, per_page = 15 } = {}) {
   try {
     const responce = await axios.get(END_POINT, {
       params: {
         key: KEY_URL,
         q,
+        page,
+        per_page,
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: 'true',
       },
     });
 
-    const data = await responce.data.hits;
+    const data = await responce.data;
 
     if (data.length === 0) {
       clearList();
