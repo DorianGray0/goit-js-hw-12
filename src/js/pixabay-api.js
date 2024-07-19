@@ -4,16 +4,16 @@ import iconOctagon from '/img/bi_x-octagon.png';
 
 import { clearList } from './render-functions';
 
+const KEY_URL = '44930216-c8fe7065044399c3ab26c911d';
+const URL = 'https://pixabay.com/api/';
+
 export function fetchPhotos(textValue) {
-  const KEY_URL = '44930216-c8fe7065044399c3ab26c911d';
-  const URL = 'https://pixabay.com/api/';
   const searchParams = new URLSearchParams({
     q: textValue,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: 'true',
   });
-
   return fetch(`${URL}?key=${KEY_URL}&${searchParams}`)
     .then(res => {
       if (!res.ok) {

@@ -2,14 +2,9 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 function renderFunctions(photos) {
-  if (photos === undefined) {
-    return;
-  }
-  console.log(photos);
-  const { hits } = photos;
   const list = document.querySelector('.photos-list');
 
-  const photoList = hits
+  const photoList = photos
     .map(
       ({
         downloads,

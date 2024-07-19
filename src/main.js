@@ -12,7 +12,7 @@ const elements = {
 
 elements.form.addEventListener('submit', handlerSearch);
 
-function handlerSearch(evt) {
+async function handlerSearch(evt) {
   evt.preventDefault();
 
   const data = {};
@@ -40,13 +40,15 @@ function handlerSearch(evt) {
   clearList();
   spinnerShown();
 
-  fetchPhotos(data.textValue)
-    .then(photos => renderFunctions(photos))
-    .finally(() => {
-      spinnerClose();
-    });
-
-  evt.currentTarget.reset();
+  try {
+    const { hits, total } = await fetchPhotos(data.textValue);
+    renderFunctions(hits);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    spinnerClose();
+    elements.form.reset();
+  }
 }
 
 function spinnerShown() {
