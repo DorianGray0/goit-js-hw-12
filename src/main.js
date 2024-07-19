@@ -48,6 +48,7 @@ async function handlerSearch(evt) {
   }
   clearList();
   spinnerShown();
+  elements.btnMore.classList.add(hiddenClass);
 
   try {
     const { hits, total } = await fetchPhotos(params);

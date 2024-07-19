@@ -26,8 +26,9 @@ export async function fetchPhotos({ q = '', page = 1, per_page = 15 } = {}) {
     });
 
     const data = await responce.data;
+    console.log(data);
 
-    if (data.length === 0) {
+    if (data.hits.length === 0) {
       clearList();
 
       iziToast.error({
