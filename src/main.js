@@ -10,17 +10,19 @@ const elements = {
   spinner: document.querySelector('.js-loader'),
 };
 
+const params = {
+  q: '',
+};
+
 elements.form.addEventListener('submit', handlerSearch);
 
 async function handlerSearch(evt) {
   evt.preventDefault();
 
-  const data = {};
-  new FormData(evt.target).forEach((value, key) => {
-    return (data[key] = value.trim().toLowerCase());
-  });
+  const form = evt.currentTarget;
+  params.q = form.elements.textValue.value.trim();
 
-  if (!data.textValue) {
+  if (!params.q) {
     iziToast.info({
       position: 'topRight',
       title: 'It is can not be empty',
@@ -41,13 +43,13 @@ async function handlerSearch(evt) {
   spinnerShown();
 
   try {
-    const { hits, total } = await fetchPhotos(data.textValue);
+    const hits = await fetchPhotos(params);
     renderFunctions(hits);
   } catch (err) {
     console.log(err);
   } finally {
     spinnerClose();
-    elements.form.reset();
+    form.reset();
   }
 }
 
