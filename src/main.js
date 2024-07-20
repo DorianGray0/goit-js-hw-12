@@ -37,7 +37,7 @@ async function handlerSearch(evt) {
     iziToast.info({
       position: 'topRight',
       title: 'It is can not be empty',
-      message: 'you must to write something in the stroke',
+      message: 'you must to write something into the stroke',
       titleColor: 'white',
       titleSize: '16px',
       messageColor: 'white',
