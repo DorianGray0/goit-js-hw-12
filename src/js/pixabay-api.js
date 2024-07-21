@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { clearList } from './render-functions';
-
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import iconOctagon from '/img/bi_x-octagon.png';
+
+import { clearList } from './render-functions';
 
 const KEY_URL = '44930216-c8fe7065044399c3ab26c911d';
 const URL = 'https://pixabay.com';
